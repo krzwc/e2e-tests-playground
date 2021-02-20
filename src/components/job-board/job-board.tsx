@@ -26,8 +26,17 @@ const filterBySearchTerm = (
   );
 };
 
+const locations = (jobOffers: JobOffer[]) =>
+  Array.from(new Set(jobOffers.map((jobOffer) => jobOffer.location)));
+
 const filterByFavorite = (jobOffers: JobOffer[], favoriteOffers: string[]) => {
   return jobOffers.filter((jobOffer) => favoriteOffers.includes(jobOffer.key));
+};
+
+const filterByLocation = (jobOffers: JobOffer[], location: string) => {
+  return jobOffers.filter(
+    ({ location: offersLocation }) => offersLocation === location
+  );
 };
 
 export const JobBoard: FunctionComponent = () => {
@@ -36,6 +45,7 @@ export const JobBoard: FunctionComponent = () => {
   const [favoriteOffers, setFavoriteOffers] = useState<string[]>(
     localStorageFacade.getFavoriteJobOffers()
   );
+  const [location, setLocation] = useState<string>("");
   const [filterFavoriteOn, setFilterFavoriteOn] = useState(false);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   useEffect(() => {
@@ -53,13 +63,23 @@ export const JobBoard: FunctionComponent = () => {
   useEffect(() => {
     localStorageFacade.updateFavoriteJobOffers(favoriteOffers);
   }, [favoriteOffers]);
+  useEffect(() => {
+    if (location) {
+      setJobOffers(filterByLocation(jobOffersData, location));
+    } else {
+      setJobOffers(jobOffersData);
+    }
+  }, [location]);
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(event.target.value);
   return (
     <article>
       <div className={styles.filters}>
         <Input onChange={onChangeHandler} />
-        <LocationFilter />
+        <LocationFilter
+          locations={locations(jobOffersData)}
+          onChange={setLocation}
+        />
         <FavoriteOffersFilter onClickHandler={setFilterFavoriteOn} />
       </div>
       {jobOffers.map((offer) => {

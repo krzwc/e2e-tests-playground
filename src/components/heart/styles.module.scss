@@ -4,6 +4,7 @@
   width: 20px;
   height: 20px;
   display: "inline-block";
+  cursor: pointer;
 
   svg {
     @include svg;
@@ -11,5 +12,10 @@
 
   .red {
     fill: red;
+  }
+
+  .filter {
+    width: 100%;
+    height: 100%;
   }
 }

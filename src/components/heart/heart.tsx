@@ -1,32 +1,27 @@
-import { FunctionComponent, Dispatch, SetStateAction } from "react";
+import { FunctionComponent } from "react";
 import styles from "./styles.module.scss";
 
 export interface HeartProps {
-  offerKey: string;
-  setFavoriteOffers: Dispatch<SetStateAction<string[]>>;
-  favoriteOffers: string[];
+  onClickHandler: () => void;
+  className: string;
 }
 
 export const Heart: FunctionComponent<HeartProps> = ({
-  offerKey,
-  setFavoriteOffers,
-  favoriteOffers,
+  onClickHandler,
+  className,
 }) => {
-  const isFavorite = favoriteOffers.some((offer) => offer === offerKey);
-  const onClickHandler = () => {
-    if (!isFavorite) {
-      setFavoriteOffers([...favoriteOffers, offerKey]);
-    } else {
-      setFavoriteOffers(favoriteOffers.filter((offer) => offer !== offerKey));
-    }
-  };
-
   return (
     <div className={styles.heartContainer}>
       <svg
         viewBox="0 0 32 32"
         onClick={onClickHandler}
-        className={isFavorite ? styles.red : ""}
+        className={
+          className === "red"
+            ? styles.red
+            : className === "filter"
+            ? styles.filter
+            : ""
+        }
       >
         <path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z" />
       </svg>

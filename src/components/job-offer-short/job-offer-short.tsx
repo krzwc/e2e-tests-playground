@@ -1,11 +1,14 @@
 import { FunctionComponent } from "react";
 import type { JobOffer, Company } from "common/interfaces";
-import { Heart, HeartProps } from "components/heart";
+import {
+  FavoriteOfferToggle,
+  FavoriteOfferToggleProps,
+} from "components/favorite-offer-toggle";
 import styles from "./styles.module.scss";
 
 type JobOfferShortProps = JobOffer &
   Partial<Company> &
-  Pick<HeartProps, "favoriteOffers" | "setFavoriteOffers"> & {
+  Pick<FavoriteOfferToggleProps, "favoriteOffers" | "setFavoriteOffers"> & {
     offerKey: string;
   };
 
@@ -46,7 +49,7 @@ export const JobOfferShort: FunctionComponent<JobOfferShortProps> = ({
         </div>
       </div>
       <div className={styles.heartContainer}>
-        <Heart
+        <FavoriteOfferToggle
           offerKey={offerKey}
           favoriteOffers={favoriteOffers}
           setFavoriteOffers={setFavoriteOffers}

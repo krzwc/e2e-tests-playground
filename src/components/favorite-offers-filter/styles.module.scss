@@ -1,0 +1,17 @@
+.filterHeartContainer {
+  height: 44px;
+  width: 44px;
+  // flex-basis: 50px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 7px;
+  margin-left: 5px;
+  border-radius: 50%;
+  border: 1px solid rgb(228, 232, 240);
+
+  & > div {
+    width: 100%;
+    height: 100%;
+  }
+}

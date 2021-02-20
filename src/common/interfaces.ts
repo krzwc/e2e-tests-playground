@@ -15,10 +15,16 @@ export enum LOCATION {
 export interface JobOffer {
   key: string;
   jobTitle: string;
-  companyName: string;
+  companyId: string;
   description: string;
   skills: string[];
   markets: string[];
   jobType: string;
   location: LOCATION;
+}
+
+export interface Company {
+  key: string;
+  companyName: string;
+  logotype: string;
 }

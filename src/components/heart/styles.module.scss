@@ -1,0 +1,15 @@
+@import "../../common/styles/mixins.scss";
+
+.heartContainer {
+  width: 20px;
+  height: 20px;
+  display: "inline-block";
+
+  svg {
+    @include svg;
+  }
+
+  .red {
+    fill: red;
+  }
+}

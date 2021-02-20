@@ -1,9 +1,69 @@
+@import "../../common/styles/mixins.scss";
+
 .jobOfferShort {
   width: 100%;
+  height: 86px;
   display: flex;
-  border: 1px solid black;
-  padding: 8px 20px 8px 0;
-  margin: 0px 10px 12px;
-  border-radius: 3px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: -1px 6px 12px -8px rgba(0, 0, 0, 0.75);
+  margin-bottom: 10px;
+  border-radius: 6px;
+  text-decoration: none;
   cursor: pointer;
+
+  .companyLogo {
+    display: flex;
+    flex-basis: 150px;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+
+    img {
+      height: 60px;
+      width: 100px;
+      object-fit: scale-down;
+    }
+  }
+
+  .jobDetails {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 20px 8px 0;
+    flex-direction: column;
+    width: 100%;
+
+    .jobTitle {
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .workplaceDetails {
+      display: flex;
+      flex-direction: row;
+
+      .company,
+      .location {
+        display: flex;
+        align-items: center;
+
+        svg {
+          @include svg;
+        }
+
+        .companyName,
+        .locationName {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  .heartContainer {
+    display: flex;
+    flex-basis: 50px;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: center;
+  }
 }

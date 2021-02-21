@@ -1,3 +1,12 @@
+@import "../../common/styles/mixins.scss";
+
+/* ANTD ovverrides */
+.ant-btn:hover,
+.ant-btn:focus {
+  color: inherit;
+  border-color: inherit;
+}
+
 .locationFilter {
   border-radius: 50%/95% !important;
   text-transform: none;
@@ -8,4 +17,8 @@
   margin-left: 5px;
   justify-content: space-between;
   height: 44px !important;
+}
+
+.filterOn {
+  @include filterOn;
 }

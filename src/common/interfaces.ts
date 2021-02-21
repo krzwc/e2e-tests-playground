@@ -1,4 +1,5 @@
 export enum LOCATION {
+  all = "All",
   earth = "Earth",
   moon = "Moon",
   mercury = "Mercury",

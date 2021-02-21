@@ -3,60 +3,19 @@ import { compose, identity } from "ramda";
 import { JobOfferShort } from "components/job-offer-short";
 import { FavoriteOffersFilter } from "components/favorite-offers-filter";
 import { LocationFilter } from "components/location-filter";
-import useDebounce from "hooks/use-debounce";
-import { JobOffer, Company } from "common/interfaces";
+import { useDebounce } from "hooks/use-debounce";
+import { JobOffer } from "common/interfaces";
 import { Input } from "components/input";
 import { jobOffersData, companiesData } from "common/data";
 import { localStorageFacade } from "common/helpers";
+import {
+  findCompanyByID,
+  filterByFavorite,
+  filterByLocation,
+  filterBySearchTerm,
+  locations,
+} from "./helpers";
 import styles from "./styles.module.scss";
-
-const findCompanyByID = (companyId: string, companiesData: Company[]) =>
-  companiesData.find((company) => company.key === companyId);
-
-interface Filter {
-  jobOffers: JobOffer[];
-  companiesData?: Company[];
-  term?: string;
-  favoriteOffers?: string[];
-  location?: string;
-}
-
-const filterBySearchTerm = (filterData: Filter): Filter => {
-  const { jobOffers, companiesData = [], term = "" } = filterData;
-  return {
-    ...filterData,
-    jobOffers: jobOffers.filter(
-      (jobOffer) =>
-        (findCompanyByID(jobOffer.companyId, companiesData)?.companyName ?? "")
-          .toLowerCase()
-          .includes(term.toLowerCase()) ||
-        jobOffer.jobTitle.toLowerCase().includes(term.toLowerCase())
-    ),
-  };
-};
-
-const locations = (jobOffers: JobOffer[]) =>
-  Array.from(new Set(jobOffers.map((jobOffer) => jobOffer.location)));
-
-const filterByFavorite = (filterData: Filter): Filter => {
-  const { jobOffers, favoriteOffers = [] } = filterData;
-  return {
-    ...filterData,
-    jobOffers: jobOffers.filter((jobOffer) =>
-      favoriteOffers.includes(jobOffer.key)
-    ),
-  };
-};
-
-const filterByLocation = (filterData: Filter): Filter => {
-  const { jobOffers, location } = filterData;
-  return {
-    ...filterData,
-    jobOffers: jobOffers.filter(
-      ({ location: offerLocation }) => offerLocation === location
-    ),
-  };
-};
 
 export const JobBoard: FunctionComponent = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -72,14 +31,14 @@ export const JobBoard: FunctionComponent = () => {
   const filterByFavoriteFunction = filterFavoriteOn
     ? filterByFavorite
     : identity;
-  const FilterByLocationFunction =
+  const filterByLocationFunction =
     location !== "" ? filterByLocation : identity;
   useEffect(() => {
     setJobOffers(
       compose(
         filterBySearchTermFunction,
         filterByFavoriteFunction,
-        FilterByLocationFunction
+        filterByLocationFunction
       )({
         jobOffers: jobOffersData,
         companiesData,
@@ -91,7 +50,7 @@ export const JobBoard: FunctionComponent = () => {
   }, [
     filterBySearchTermFunction,
     filterByFavoriteFunction,
-    FilterByLocationFunction,
+    filterByLocationFunction,
     debouncedSearchTerm,
     filterFavoriteOn,
     favoriteOffers,
@@ -103,15 +62,20 @@ export const JobBoard: FunctionComponent = () => {
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(event.target.value);
+
   return (
     <article>
       <div className={styles.filters}>
         <Input onChange={onChangeHandler} />
         <LocationFilter
+          location={location}
           locations={locations(jobOffersData)}
           onChange={setLocation}
         />
-        <FavoriteOffersFilter onClickHandler={setFilterFavoriteOn} />
+        <FavoriteOffersFilter
+          onClickHandler={setFilterFavoriteOn}
+          filterFavoriteOn={filterFavoriteOn}
+        />
       </div>
       {jobOffers.map((offer) => {
         // TODO isArray

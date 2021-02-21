@@ -8,3 +8,9 @@
   flex-shrink: 0;
   user-select: none;
 }
+
+@mixin filterOn {
+  color: rgb(255, 64, 129) !important;
+  border-color: rgb(255, 64, 129) !important;
+  background: rgba(255, 64, 129, 0.08) !important;
+}

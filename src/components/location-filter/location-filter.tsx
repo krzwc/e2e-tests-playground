@@ -2,15 +2,19 @@ import { FunctionComponent } from "react";
 import { Menu, Dropdown, Button } from "antd";
 import { MenuClickEventHandler } from "rc-menu/lib/interface";
 import { DownOutlined } from "@ant-design/icons";
+import { classNames } from "common/helpers";
+import { LOCATION } from "common/interfaces";
 import styles from "./styles.module.scss";
 
 export const LocationFilter: FunctionComponent<{
   locations: string[];
+  location: string;
   onChange: (location: string) => void;
-}> = ({ locations, onChange }) => {
+}> = ({ locations, onChange, location }) => {
   const handleMenuClick: MenuClickEventHandler = ({ key }) => {
     onChange(locations[Number(key)]);
   };
+  const isLocationSet = location !== "" && location !== LOCATION.all;
   const menu = (
     <Menu onClick={handleMenuClick}>
       {locations.map((location, index) => (
@@ -20,8 +24,13 @@ export const LocationFilter: FunctionComponent<{
   );
   return (
     <Dropdown overlay={menu}>
-      <Button className={styles.locationFilter}>
-        Location <DownOutlined />
+      <Button
+        className={classNames(
+          styles.locationFilter,
+          isLocationSet ? styles.filterOn : ""
+        )}
+      >
+        {isLocationSet ? location : "Location"} <DownOutlined />
       </Button>
     </Dropdown>
   );

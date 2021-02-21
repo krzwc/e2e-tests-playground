@@ -1,6 +1,8 @@
 import { FunctionComponent, useState, useEffect } from "react";
 import { compose, identity } from "ramda";
+import { Switch, Route } from "react-router-dom";
 import { JobOfferShort } from "components/job-offer-short";
+import { JobOfferExtended } from "components/job-offer-extended";
 import { FavoriteOffersFilter } from "components/favorite-offers-filter";
 import { LocationFilter } from "components/location-filter";
 import { useDebounce } from "hooks/use-debounce";
@@ -64,7 +66,7 @@ export const JobBoard: FunctionComponent = () => {
     setSearchTerm(event.target.value);
 
   return (
-    <article>
+    <article className={styles.jobBoard}>
       <div className={styles.filters}>
         <Input onChange={onChangeHandler} />
         <LocationFilter
@@ -91,6 +93,13 @@ export const JobBoard: FunctionComponent = () => {
           />
         );
       })}
+      <Switch>
+        {jobOffers.map(({ key }) => (
+          <Route path={`/${key}`} key={key}>
+            {<JobOfferExtended />}
+          </Route>
+        ))}
+      </Switch>
     </article>
   );
 };

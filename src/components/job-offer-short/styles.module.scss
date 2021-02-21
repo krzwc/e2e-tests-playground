@@ -12,6 +12,15 @@
   text-decoration: none;
   cursor: pointer;
 
+  .link {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    color: inherit;
+    text-decoration: inherit;
+    cursor: inherit;
+  }
+
   .companyLogo {
     display: flex;
     flex-basis: 150px;

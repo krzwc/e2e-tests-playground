@@ -6,7 +6,7 @@ export const jobOffersData: JobOffer[] = [
     jobTitle: "Frontend developer",
     companyId: "1",
     description:
-      "Build human-centric UX with us using web technologies like React, Next.js, TypeScript, Express.js, and Jest.",
+      "Build human-centric UX using web technologies like React, Next.js, TypeScript, Express.js, and Jest.",
     skills: ["react", "js", "git"],
     markets: ["it", "startup"],
     jobType: "onsite",

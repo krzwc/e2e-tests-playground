@@ -7,13 +7,13 @@ import {
 } from "components/favorite-offer-toggle";
 import styles from "./styles.module.scss";
 
-type JobOfferShortProps = JobOffer &
+export type JobOfferProps = JobOffer &
   Partial<Company> &
   Pick<FavoriteOfferToggleProps, "favoriteOffers" | "setFavoriteOffers"> & {
     offerKey: string;
   };
 
-export const JobOfferShort: FunctionComponent<JobOfferShortProps> = ({
+export const JobOfferShort: FunctionComponent<JobOfferProps> = ({
   offerKey,
   jobTitle,
   companyName,

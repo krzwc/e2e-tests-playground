@@ -6,6 +6,7 @@ interface Filter {
   term?: string;
   favoriteOffers?: string[];
   location?: string;
+  skills?: string[];
 }
 
 export const findCompanyByID = (companyId: string, companiesData: Company[]) =>
@@ -52,3 +53,18 @@ export const filterByLocation = (filterData: Filter): Filter => {
           ),
   };
 };
+
+export const filterBySkills = (filterData: Filter): Filter => {
+  const { jobOffers, skills } = filterData;
+  return {
+    ...filterData,
+    jobOffers: skills?.length
+      ? jobOffers.filter(({ skills: jobOfferSkills }) =>
+          jobOfferSkills?.some((skill) => skills?.includes(skill))
+        )
+      : jobOffers,
+  };
+};
+
+export const allSkills = (jobOffers: JobOffer[]) =>
+  Array.from(new Set(jobOffers.flatMap((jobOffer) => jobOffer.skills)));

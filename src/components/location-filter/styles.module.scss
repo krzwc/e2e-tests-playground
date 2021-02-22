@@ -10,13 +10,16 @@
 .locationFilter {
   border-radius: 50%/95% !important;
   text-transform: none;
-  color: rgb(119, 119, 119);
   background: rgb(255, 255, 255);
   border-color: rgb(228, 232, 240);
   min-width: 100px;
   margin-left: 5px;
   justify-content: space-between;
   height: 44px !important;
+
+  span {
+    color: rgb(119, 119, 119);
+  }
 }
 
 .filterOn {

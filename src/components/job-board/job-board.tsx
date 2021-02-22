@@ -5,6 +5,7 @@ import { JobOfferShort } from "components/job-offer-short";
 import { JobOfferExtended } from "components/job-offer-extended";
 import { FavoriteOffersFilter } from "components/favorite-offers-filter";
 import { LocationFilter } from "components/location-filter";
+import { SkillFilter } from "components/skill-filter";
 import { useDebounce } from "hooks/use-debounce";
 import { JobOffer } from "common/interfaces";
 import { Input } from "components/input";
@@ -15,7 +16,9 @@ import {
   filterByFavorite,
   filterByLocation,
   filterBySearchTerm,
+  filterBySkills,
   locations,
+  allSkills,
 } from "./helpers";
 import styles from "./styles.module.scss";
 
@@ -26,6 +29,7 @@ export const JobBoard: FunctionComponent = () => {
     localStorageFacade.getFavoriteJobOffers()
   );
   const [location, setLocation] = useState<string>("");
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [filterFavoriteOn, setFilterFavoriteOn] = useState<boolean>(false);
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
   const filterBySearchTermFunction =
@@ -35,28 +39,35 @@ export const JobBoard: FunctionComponent = () => {
     : identity;
   const filterByLocationFunction =
     location !== "" ? filterByLocation : identity;
+  const filterBySkillsFunction = selectedSkills.length
+    ? filterBySkills
+    : identity;
   useEffect(() => {
     setJobOffers(
       compose(
         filterBySearchTermFunction,
         filterByFavoriteFunction,
-        filterByLocationFunction
+        filterByLocationFunction,
+        filterBySkillsFunction
       )({
         jobOffers: jobOffersData,
         companiesData,
         term: debouncedSearchTerm,
         favoriteOffers,
         location,
+        skills: selectedSkills,
       }).jobOffers
     );
   }, [
     filterBySearchTermFunction,
     filterByFavoriteFunction,
     filterByLocationFunction,
+    filterBySkillsFunction,
     debouncedSearchTerm,
     filterFavoriteOn,
     favoriteOffers,
     location,
+    selectedSkills,
   ]);
   useEffect(() => {
     localStorageFacade.updateFavoriteJobOffers(favoriteOffers);
@@ -79,6 +90,11 @@ export const JobBoard: FunctionComponent = () => {
           filterFavoriteOn={filterFavoriteOn}
         />
       </div>
+      <SkillFilter
+        allSkills={allSkills(jobOffersData)}
+        selectedSkills={selectedSkills}
+        setSelectedSkills={setSelectedSkills}
+      />
       {jobOffers.map((offer) => {
         // TODO isArray
         const companyData = findCompanyByID(offer.companyId, companiesData);
@@ -94,11 +110,23 @@ export const JobBoard: FunctionComponent = () => {
         );
       })}
       <Switch>
-        {jobOffers.map(({ key }) => (
-          <Route path={`/${key}`} key={key}>
-            {<JobOfferExtended />}
-          </Route>
-        ))}
+        {jobOffers.map((offer) => {
+          const companyData = findCompanyByID(offer.companyId, companiesData);
+          return (
+            <Route path={`/${offer.key}`} key={offer.key}>
+              {
+                <JobOfferExtended
+                  {...offer}
+                  offerKey={offer.key}
+                  companyName={companyData?.companyName}
+                  logotype={companyData?.logotype}
+                  favoriteOffers={favoriteOffers}
+                  setFavoriteOffers={setFavoriteOffers}
+                />
+              }
+            </Route>
+          );
+        })}
       </Switch>
     </article>
   );

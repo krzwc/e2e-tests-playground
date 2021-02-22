@@ -21,4 +21,9 @@ export const companiesData: Company[] = [
     companyName: "HAL Laboratories",
     logotype: "assets/logotypes/hal9000.jpg",
   },
+  {
+    key: "5",
+    companyName: "United Federation of Planets",
+    logotype: "assets/logotypes/federation.png",
+  },
 ];

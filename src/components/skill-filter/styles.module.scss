@@ -1,0 +1,19 @@
+@import "../../common/styles/mixins.scss";
+
+.multiselect {
+  //   border-radius: 50%/95% !important;
+  text-transform: none;
+  color: rgb(119, 119, 119);
+  background: rgb(255, 255, 255);
+  border-color: rgb(228, 232, 240);
+  min-width: 100px;
+  width: 100%;
+  margin-top: 5px !important;
+  justify-content: space-between;
+  height: 44px !important;
+  outline: none;
+
+  &::focus {
+    outline: none !important;
+  }
+}

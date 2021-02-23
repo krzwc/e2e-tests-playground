@@ -1,15 +1,14 @@
 @import "../../common/styles/mixins.scss";
+@import "../../common/styles/variables.scss";
 
 .filterHeartContainer {
-  height: 44px;
-  width: 45px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  @include center;
+  height: $filter-control;
+  width: $filter-control;
   padding: 7px;
   margin-left: 5px;
   border-radius: 50%;
-  border: 1px solid rgb(228, 232, 240);
+  border: 1px solid $light-gray;
 
   & > div {
     width: 100%;

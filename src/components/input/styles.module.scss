@@ -1,20 +1,21 @@
 @import "../../common/styles/mixins.scss";
+@import "../../common/styles/variables.scss";
 
 .input {
-  height: 44px;
+  height: $filter-control;
   flex: 1 0 auto;
   padding-left: 11px;
-  line-height: 22px;
-  border-radius: 22px;
-  border: 1px solid rgb(228, 232, 240);
-  background: rgb(255, 255, 255);
-  color: rgba(0, 0, 0, 0.87);
+  line-height: $filter-control / 2;
+  border-radius: $filter-control / 2;
+  border: 1px solid $light-gray;
+  background: $white;
+  color: $black;
   cursor: text;
   display: inline-flex;
+  align-items: center;
   position: relative;
   font-size: 14px;
   box-sizing: border-box;
-  align-items: center;
   font-family: Open Sans, sans-serif;
   font-weight: 400;
 

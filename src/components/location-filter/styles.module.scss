@@ -1,4 +1,5 @@
 @import "../../common/styles/mixins.scss";
+@import "../../common/styles/variables.scss";
 
 /* ANTD ovverrides */
 .ant-btn:hover,
@@ -10,15 +11,15 @@
 .locationFilter {
   border-radius: 50%/95% !important;
   text-transform: none;
-  background: rgb(255, 255, 255);
-  border-color: rgb(228, 232, 240);
+  background: $white;
+  border-color: $light-gray;
   min-width: 100px;
   margin-left: 5px;
   justify-content: space-between;
   height: 44px !important;
 
   span {
-    color: rgb(119, 119, 119);
+    color: $dark-gray;
   }
 }
 

@@ -1,17 +1,19 @@
 @import "../../common/styles/mixins.scss";
+@import "../../common/styles/variables.scss";
+
 .header {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: white;
+  background-color: $white;
   padding: 0 10px;
-  box-shadow: -1px 1px 16px -9px rgba(0, 0, 0, 0.75);
-  min-width: 370px;
+  box-shadow: -1px 1px 16px -9px $black;
+  min-width: $header-width;
 
   .filters {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: $standard-margin;
   }
 
   .heading {
@@ -20,5 +22,5 @@
 }
 
 .shortOffersContainer {
-  padding: 190px 10px 10px 10px;
+  padding: $header-height 10px 10px 10px;
 }

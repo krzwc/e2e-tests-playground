@@ -1,9 +1,7 @@
 @import "../../common/styles/mixins.scss";
+@import "../../common/styles/variables.scss";
 
 .heartContainer {
-  width: 20px;
-  height: 20px;
-  display: "inline-block";
   cursor: pointer;
 
   svg {
@@ -11,7 +9,7 @@
   }
 
   .red {
-    fill: rgb(255, 64, 129);
+    fill: $dark-pink;
   }
 
   .filter {

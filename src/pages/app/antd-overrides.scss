@@ -1,34 +1,36 @@
+@import "../../common/styles/variables.scss";
+
 .ant-btn:hover,
 .ant-btn:focus {
-  color: rgb(119, 119, 119);
-  border-color: rgb(228, 232, 240);
+  color: $dark-gray;
+  border-color: $light-gray;
 }
 
 .ant-select-selector {
   height: 100%;
-  border-radius: 22px !important;
+  border-radius: $filter-control/2 !important;
   min-width: 150px;
 }
 
 .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
-  border-color: rgb(228, 232, 240);
+  border-color: $light-gray;
 }
 
 .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
   .ant-select-selector {
-  border-color: rgb(228, 232, 240);
+  border-color: $light-gray;
   outline: none;
   box-shadow: none;
 }
 
 .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  background-color: rgba(255, 64, 129, 0.08);
+  background-color: $light-pink;
 }
 
 .anticon-check {
-  color: rgb(255, 64, 129);
+  color: $dark-pink;
 }
 
 .ant-select-selection-placeholder {
-  color: rgb(119, 119, 119);
+  color: $dark-gray;
 }

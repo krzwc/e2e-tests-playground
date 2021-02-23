@@ -1,4 +1,5 @@
 @import "../../common/styles/mixins.scss";
+@import "../../common/styles/variables.scss";
 
 .jobOfferShort {
   width: 100%;
@@ -88,6 +89,13 @@
           &:last-of-type {
             margin-right: 0;
           }
+        }
+      }
+
+      .type,
+      .markets {
+        @media only screen and (max-width: $mobile) {
+          display: none;
         }
       }
     }

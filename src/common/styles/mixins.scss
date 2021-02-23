@@ -28,3 +28,15 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+@mixin heading {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: rgb(119, 119, 119);
+}
+
+@mixin subheading {
+  @include heading;
+  font-size: 20px;
+}

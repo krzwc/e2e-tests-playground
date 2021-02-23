@@ -89,12 +89,13 @@ export const JobBoard: FunctionComponent = () => {
           onClickHandler={setFilterFavoriteOn}
           filterFavoriteOn={filterFavoriteOn}
         />
+        <SkillFilter
+          allSkills={allSkills(jobOffersData)}
+          selectedSkills={selectedSkills}
+          setSelectedSkills={setSelectedSkills}
+        />
       </div>
-      <SkillFilter
-        allSkills={allSkills(jobOffersData)}
-        selectedSkills={selectedSkills}
-        setSelectedSkills={setSelectedSkills}
-      />
+
       {jobOffers.map((offer) => {
         // TODO isArray
         const companyData = findCompanyByID(offer.companyId, companiesData);
@@ -120,6 +121,7 @@ export const JobBoard: FunctionComponent = () => {
                   offerKey={offer.key}
                   companyName={companyData?.companyName}
                   logotype={companyData?.logotype}
+                  about={companyData?.about}
                   favoriteOffers={favoriteOffers}
                   setFavoriteOffers={setFavoriteOffers}
                 />

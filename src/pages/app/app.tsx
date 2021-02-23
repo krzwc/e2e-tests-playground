@@ -9,7 +9,7 @@ export const App: FunctionComponent = () => {
   return (
     <Router>
       <div className={styles.app}>
-        <h3>Interplanetary job postings</h3>
+        <h3 className={styles.heading}>Interplanetary job postings</h3>
         <JobBoard />
       </div>
     </Router>

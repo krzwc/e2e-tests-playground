@@ -1,7 +1,8 @@
 @import "../../common/styles/mixins.scss";
 
-.multiselect {
-  //   border-radius: 50%/95% !important;
+.skillFilter {
+  display: flex;
+  flex-grow: 1;
   text-transform: none;
   color: rgb(119, 119, 119);
   background: rgb(255, 255, 255);

@@ -38,3 +38,20 @@
   color: black;
   font-size: 30px;
 }
+
+.heading {
+  @include heading;
+}
+
+.subheading {
+  @include subheading;
+}
+
+.companyLogo {
+  @include center;
+
+  img {
+    height: 80px;
+    object-fit: scale-down;
+  }
+}

@@ -15,12 +15,11 @@ export const SkillFilter: FunctionComponent<{
     mode: "multiple",
     value: selectedSkills,
     options,
-    // style: { width: "100%" },
     onChange: (newValue) => {
       setSelectedSkills(newValue);
     },
     placeholder: "Select skills...",
     dropdownMatchSelectWidth: true,
   };
-  return <Select {...selectProps} className={styles.multiselect} />;
+  return <Select {...selectProps} className={styles.skillFilter} />;
 };

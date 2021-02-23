@@ -28,4 +28,5 @@ export interface Company {
   key: string;
   companyName: string;
   logotype: string;
+  about: string;
 }

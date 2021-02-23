@@ -78,38 +78,42 @@ export const JobBoard: FunctionComponent = () => {
 
   return (
     <article className={styles.jobBoard}>
-      <div className={styles.filters}>
-        <Input onChange={onChangeHandler} />
-        <LocationFilter
-          location={location}
-          locations={locations(jobOffersData)}
-          onChange={setLocation}
-        />
-        <FavoriteOffersFilter
-          onClickHandler={setFilterFavoriteOn}
-          filterFavoriteOn={filterFavoriteOn}
-        />
-        <SkillFilter
-          allSkills={allSkills(jobOffersData)}
-          selectedSkills={selectedSkills}
-          setSelectedSkills={setSelectedSkills}
-        />
-      </div>
-
-      {jobOffers.map((offer) => {
-        // TODO isArray
-        const companyData = findCompanyByID(offer.companyId, companiesData);
-        return (
-          <JobOfferShort
-            {...offer}
-            offerKey={offer.key}
-            companyName={companyData?.companyName}
-            logotype={companyData?.logotype}
-            favoriteOffers={favoriteOffers}
-            setFavoriteOffers={setFavoriteOffers}
+      <header className={styles.header}>
+        <h3 className={styles.heading}>Interplanetary job postings</h3>
+        <div className={styles.filters}>
+          <Input onChange={onChangeHandler} />
+          <LocationFilter
+            location={location}
+            locations={locations(jobOffersData)}
+            onChange={setLocation}
           />
-        );
-      })}
+          <FavoriteOffersFilter
+            onClickHandler={setFilterFavoriteOn}
+            filterFavoriteOn={filterFavoriteOn}
+          />
+          <SkillFilter
+            allSkills={allSkills(jobOffersData)}
+            selectedSkills={selectedSkills}
+            setSelectedSkills={setSelectedSkills}
+          />
+        </div>
+      </header>
+      <section className={styles.shortOffersContainer}>
+        {jobOffers.map((offer) => {
+          // TODO isArray
+          const companyData = findCompanyByID(offer.companyId, companiesData);
+          return (
+            <JobOfferShort
+              {...offer}
+              offerKey={offer.key}
+              companyName={companyData?.companyName}
+              logotype={companyData?.logotype}
+              favoriteOffers={favoriteOffers}
+              setFavoriteOffers={setFavoriteOffers}
+            />
+          );
+        })}
+      </section>
       <Switch>
         {jobOffers.map((offer) => {
           const companyData = findCompanyByID(offer.companyId, companiesData);

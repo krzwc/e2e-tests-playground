@@ -1,5 +1,23 @@
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+@import "../../common/styles/mixins.scss";
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  padding: 0 10px;
+  box-shadow: -1px 1px 16px -9px rgba(0, 0, 0, 0.75);
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .heading {
+    @include heading;
+  }
+}
+
+.shortOffersContainer {
+  padding: 190px 10px 10px 10px;
 }

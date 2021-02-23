@@ -9,8 +9,9 @@ import { SkillFilter } from "components/skill-filter";
 import { useDebounce } from "hooks/use-debounce";
 import { JobOffer } from "common/interfaces";
 import { Input } from "components/input";
+import { Empty } from "components/empty";
 import { jobOffersData, companiesData } from "common/data";
-import { localStorageFacade } from "common/helpers";
+import { localStorageFacade, isNotEmpty } from "common/helpers";
 import {
   findCompanyByID,
   filterByFavorite,
@@ -115,24 +116,28 @@ export const JobBoard: FunctionComponent = () => {
         })}
       </section>
       <Switch>
-        {jobOffers.map((offer) => {
-          const companyData = findCompanyByID(offer.companyId, companiesData);
-          return (
-            <Route path={`/${offer.key}`} key={offer.key}>
-              {
-                <JobOfferExtended
-                  {...offer}
-                  offerKey={offer.key}
-                  companyName={companyData?.companyName}
-                  logotype={companyData?.logotype}
-                  about={companyData?.about}
-                  favoriteOffers={favoriteOffers}
-                  setFavoriteOffers={setFavoriteOffers}
-                />
-              }
-            </Route>
-          );
-        })}
+        {isNotEmpty(jobOffers) ? (
+          jobOffers.map((offer) => {
+            const companyData = findCompanyByID(offer.companyId, companiesData);
+            return (
+              <Route path={`/${offer.key}`} key={offer.key}>
+                {
+                  <JobOfferExtended
+                    {...offer}
+                    offerKey={offer.key}
+                    companyName={companyData?.companyName}
+                    logotype={companyData?.logotype}
+                    about={companyData?.about}
+                    favoriteOffers={favoriteOffers}
+                    setFavoriteOffers={setFavoriteOffers}
+                  />
+                }
+              </Route>
+            );
+          })
+        ) : (
+          <Empty description="No offers matching the criteria" />
+        )}
       </Switch>
     </article>
   );

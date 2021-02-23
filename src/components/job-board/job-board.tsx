@@ -7,10 +7,9 @@ import { FavoriteOffersFilter } from "components/favorite-offers-filter";
 import { LocationFilter } from "components/location-filter";
 import { SkillFilter } from "components/skill-filter";
 import { useDebounce } from "hooks/use-debounce";
-import { JobOffer } from "common/interfaces";
+import type { Company, JobOffer } from "common/interfaces";
 import { Input } from "components/input";
 import { Empty } from "components/empty";
-import { jobOffersData, companiesData } from "common/data";
 import { localStorageFacade, isNotEmpty } from "common/helpers";
 import {
   findCompanyByID,
@@ -23,7 +22,10 @@ import {
 } from "./helpers";
 import styles from "./styles.module.scss";
 
-export const JobBoard: FunctionComponent = () => {
+export const JobBoard: FunctionComponent<{
+  jobOffersData: JobOffer[];
+  companiesData: Company[];
+}> = ({ jobOffersData, companiesData }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [jobOffers, setJobOffers] = useState<JobOffer[]>(jobOffersData);
   const [favoriteOffers, setFavoriteOffers] = useState<string[]>(
@@ -69,6 +71,8 @@ export const JobBoard: FunctionComponent = () => {
     favoriteOffers,
     location,
     selectedSkills,
+    jobOffersData,
+    companiesData,
   ]);
   useEffect(() => {
     localStorageFacade.updateFavoriteJobOffers(favoriteOffers);
@@ -101,7 +105,6 @@ export const JobBoard: FunctionComponent = () => {
       </header>
       <section className={styles.shortOffersContainer}>
         {jobOffers.map((offer) => {
-          // TODO isArray
           const companyData = findCompanyByID(offer.companyId, companiesData);
           return (
             <JobOfferShort

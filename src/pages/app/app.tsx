@@ -5,11 +5,22 @@ import styles from "./styles.module.scss";
 import "antd/dist/antd.css";
 import "./antd-overrides.scss";
 
+import { jobOffersData, companiesData } from "common/data";
+import {
+  assertExpectedArrayShape,
+  isCompanyArr,
+  isJobOfferArr,
+} from "./runtine-type-guards";
+
 export const App: FunctionComponent = () => {
+  if (jobOffersData && companiesData) {
+    assertExpectedArrayShape(jobOffersData, isJobOfferArr);
+    assertExpectedArrayShape(companiesData, isCompanyArr);
+  }
   return (
     <Router>
       <div className={styles.app}>
-        <JobBoard />
+        <JobBoard jobOffersData={jobOffersData} companiesData={companiesData} />
       </div>
     </Router>
   );

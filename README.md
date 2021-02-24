@@ -43,7 +43,7 @@ The UI will be available at `http://localhost:5000`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) with Typescript.
 Styling was based on scoped, modular scss.
-A few componewents from the `Ant Design` design system were also used.
+A few components from the `Ant Design` design system were also used.
 Certain business logic was based on `ramda` and `react router`.
 
 ## Implementation details
@@ -70,3 +70,7 @@ compose(
 The FP-based approach allows quick additions of any necessary filter functions.
 
 The details are available in the `src/components/job-board/job-board.tsx` file.
+
+## Afterword
+
+Thank you for the opportunity and your time

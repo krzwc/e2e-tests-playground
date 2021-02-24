@@ -11,6 +11,7 @@ export const FavoriteOfferToggle: FunctionComponent<FavoriteOfferToggleProps> = 
   offerKey,
   setFavoriteOffers,
   favoriteOffers,
+  ...props
 }) => {
   const isFavorite = favoriteOffers.some((offer) => offer === offerKey);
   const onClickHandler = () => {
@@ -25,6 +26,7 @@ export const FavoriteOfferToggle: FunctionComponent<FavoriteOfferToggleProps> = 
     <Heart
       className={isFavorite ? "red" : ""}
       onClickHandler={onClickHandler}
+      {...props}
     />
   );
 };

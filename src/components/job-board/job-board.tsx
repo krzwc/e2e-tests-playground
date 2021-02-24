@@ -103,7 +103,7 @@ export const JobBoard: FunctionComponent<{
           />
         </div>
       </header>
-      <section className={styles.shortOffersContainer}>
+      <section className={styles.shortOffersContainer} data-cy="all-offers">
         {jobOffers.map((offer) => {
           const companyData = findCompanyByID(offer.companyId, companiesData);
           return (

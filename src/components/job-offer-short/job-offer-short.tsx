@@ -65,6 +65,7 @@ export const JobOfferShort: FunctionComponent<JobOfferProps> = ({
           offerKey={offerKey}
           favoriteOffers={favoriteOffers}
           setFavoriteOffers={setFavoriteOffers}
+          data-cy={`favorite-offer-${offerKey}`}
         />
       </div>
     </section>

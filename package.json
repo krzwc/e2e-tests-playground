@@ -24,7 +24,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:spec": "npm run cypress:run -- --headless --spec \"cypress/integration/sample_spec.ts\"",
+    "cypress:start": "start-server-and-test start http://localhost:3000 cypress:run:spec"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +50,9 @@
   },
   "devDependencies": {
     "@types/ramda": "^0.27.38",
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-router-dom": "^5.1.7",
+    "cypress": "^6.5.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "start-server-and-test": "^1.12.0"
   }
 }

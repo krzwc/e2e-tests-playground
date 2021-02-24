@@ -76,4 +76,15 @@ export const jobOffersData: JobOffer[] = [
     jobType: "remote",
     location: LOCATION.remote,
   },
+  {
+    key: "8",
+    jobTitle: "Bounty Hunter",
+    companyId: "6",
+    description:
+      "Pursue and apprehend fugitives who have skipped bail or failed to appear for court proceedings",
+    skills: ["bounty hunting", "weapons handling"],
+    markets: ["management", "space travel"],
+    jobType: "remote",
+    location: LOCATION.remote,
+  },
 ];

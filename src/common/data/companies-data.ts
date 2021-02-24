@@ -18,7 +18,7 @@ export const companiesData: Company[] = [
   {
     key: "3",
     companyName: "NASA",
-    logotype: "assets/logotypes/nasa.jpeg",
+    logotype: "assets/logotypes/nasa.png",
     about:
       "The National Aeronautics and Space Administration is an independent agency of the U.S. federal government responsible for the civilian space program, as well as aeronautics and space research.",
   },
@@ -35,5 +35,12 @@ export const companiesData: Company[] = [
     logotype: "assets/logotypes/federation.png",
     about:
       "Founded in 2161, the United Federation of Planets is an interstellar alliance of more than 150 planetary governments, spread out over 8,000 light-years. Members of the Federation are united in various endeavors involving trade, exploration, science and defense. The Federation is overseen by the Federation Council, which is comprised of representatives from member planets.",
+  },
+  {
+    key: "6",
+    companyName: "Guardians of the Galaxy",
+    logotype: "assets/logotypes/guardians.png",
+    about:
+      "Group of independent bounty hunting contractors, typically taking assignments from bail bond agencies",
   },
 ];

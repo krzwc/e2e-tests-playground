@@ -10,7 +10,7 @@ import {
   assertExpectedArrayShape,
   isCompanyArr,
   isJobOfferArr,
-} from "./runtine-type-guards";
+} from "./runtime-type-guards";
 
 export const App: FunctionComponent = () => {
   if (jobOffersData && companiesData) {

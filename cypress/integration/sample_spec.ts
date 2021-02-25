@@ -6,7 +6,7 @@ describe("App", () => {
     cy.get("[data-cy=all-offers] section").should("have.length", 7);
   });
 
-  // Testing if css class is assigned after click
+  // Testing if css class is assigned after click and LS is updated
   it.only("should change heart color when clicked and save to LS", () => {
     cy.clearLocalStorage("favoriteJobOffers");
     cy.get("[data-cy=favorite-offer-1]")

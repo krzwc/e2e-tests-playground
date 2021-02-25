@@ -21,5 +21,11 @@ export const SkillFilter: FunctionComponent<{
     placeholder: "Select skills...",
     dropdownMatchSelectWidth: true,
   };
-  return <Select {...selectProps} className={styles.skillFilter} />;
+  return (
+    <Select
+      {...selectProps}
+      className={styles.skillFilter}
+      data-cy="skill-filter"
+    />
+  );
 };

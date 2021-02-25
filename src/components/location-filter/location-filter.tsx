@@ -29,6 +29,7 @@ export const LocationFilter: FunctionComponent<{
           styles.locationFilter,
           isLocationSet ? styles.filterOn : ""
         )}
+        data-cy="location-filter"
       >
         {isLocationSet ? location : "Location"} <DownOutlined />
       </Button>

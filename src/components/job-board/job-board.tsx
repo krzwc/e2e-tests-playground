@@ -1,6 +1,6 @@
 import { FunctionComponent, useState, useEffect } from "react";
 import { compose, identity } from "ramda";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { JobOfferShort } from "components/job-offer-short";
 import { JobOfferExtended } from "components/job-offer-extended";
 import { FavoriteOffersFilter } from "components/favorite-offers-filter";
@@ -118,30 +118,36 @@ export const JobBoard: FunctionComponent<{
           );
         })}
       </section>
-      <Switch>
-        {isNotEmpty(jobOffers) ? (
-          jobOffers.map((offer) => {
-            const companyData = findCompanyByID(offer.companyId, companiesData);
-            return (
-              <Route path={`/${offer.key}`} key={offer.key}>
-                {
-                  <JobOfferExtended
-                    {...offer}
-                    offerKey={offer.key}
-                    companyName={companyData?.companyName}
-                    logotype={companyData?.logotype}
-                    about={companyData?.about}
-                    favoriteOffers={favoriteOffers}
-                    setFavoriteOffers={setFavoriteOffers}
-                  />
-                }
-              </Route>
-            );
-          })
-        ) : (
-          <Empty description="No offers matching the criteria" />
-        )}
-      </Switch>
+      {isNotEmpty(jobOffers) ? (
+        <Switch>
+          <Route
+            path={"/:slug"}
+            render={(props) => {
+              const slug = props.match.params.slug;
+              if (slug && jobOffers.some(({ key }) => key === slug)) {
+                const companyData = findCompanyByID(slug, companiesData);
+                const offer = jobOffers.find((offer) => offer.key === slug);
+                return (
+                  offer && (
+                    <JobOfferExtended
+                      {...offer}
+                      offerKey={offer.key}
+                      companyName={companyData?.companyName}
+                      logotype={companyData?.logotype}
+                      about={companyData?.about}
+                      favoriteOffers={favoriteOffers}
+                      setFavoriteOffers={setFavoriteOffers}
+                    />
+                  )
+                );
+              }
+              return <Redirect to="/" />;
+            }}
+          />
+        </Switch>
+      ) : (
+        <Empty description="No offers matching the criteria" />
+      )}
     </article>
   );
 };

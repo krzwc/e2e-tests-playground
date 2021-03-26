@@ -7,7 +7,7 @@ describe("App", () => {
   });
 
   // Testing if css class is assigned after click and LS is updated
-  it.only("should change heart color when clicked and save to LS", () => {
+  it("should change heart color when clicked and save to LS", () => {
     cy.clearLocalStorage("favoriteJobOffers");
     cy.get("[data-cy=favorite-offer-1]")
       .click()
@@ -41,8 +41,19 @@ describe("App", () => {
 
     cy.get(".ant-dropdown").should("be.visible");
 
-    cy.get(".ant-dropdown-menu").click();
+    cy.get(".ant-dropdown-menu")
+      .contains("Earth")
+      .closest(".ant-dropdown-menu-item")
+      .click();
 
     cy.get("[data-cy=all-offers] section").should("have.length", 1);
+  });
+  //Clicking on the short job offer causes modal to show and url to change
+  it("should open modal after clicking short offer and change url", () => {
+    cy.get("[data-cy=all-offers] section").first().click();
+    cy.get("[data-cy=modal]").should("be.visible");
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq("/1");
+    });
   });
 });

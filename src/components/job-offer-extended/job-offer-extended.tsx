@@ -13,7 +13,7 @@ export const JobOfferExtended: FunctionComponent<JobOfferProps> = ({
   about,
 }) => {
   return (
-    <article className={styles.modal}>
+    <article className={styles.modal} data-cy="modal">
       <section className={styles.modalInside}>
         <section className={styles.modalContentContainer}>
           <Link to="/" className={styles.crossLink}>

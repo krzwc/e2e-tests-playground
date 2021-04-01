@@ -3,7 +3,8 @@ describe("App", () => {
     cy.visit("http://localhost:3000");
   });
   it("should render 7 links to job offers", () => {
-    cy.get("[data-cy=all-offers] section").should("have.length", 7);
+    // cy.get("[data-cy=all-offers] section").should("have.length", 7);
+    cy.checkNumberOfOffers(7);
   });
 
   // Testing if css class is assigned after click and LS is updated
@@ -21,7 +22,8 @@ describe("App", () => {
   it("should filter job offers after filtering by keywords", () => {
     cy.get("[data-cy=input]").type("Radiation");
 
-    cy.get("[data-cy=all-offers] section").should("have.length", 1);
+    // cy.get("[data-cy=all-offers] section").should("have.length", 1);
+    cy.checkNumberOfOffers(1);
   });
   // Testing multiselect with dropdown
   it("should filter job offers after selecting a skill", () => {
@@ -32,7 +34,8 @@ describe("App", () => {
 
     cy.get(".ant-select-item").first().click();
 
-    cy.get("[data-cy=all-offers] section").should("have.length", 1);
+    // cy.get("[data-cy=all-offers] section").should("have.length", 1);
+    cy.checkNumberOfOffers(1);
   });
 
   //Testing single select
@@ -41,12 +44,10 @@ describe("App", () => {
 
     cy.get(".ant-dropdown").should("be.visible");
 
-    cy.get(".ant-dropdown-menu")
-      .contains("Earth")
-      .closest(".ant-dropdown-menu-item")
-      .click();
+    cy.get(".ant-dropdown-menu").contains("Earth").click({ force: true });
 
-    cy.get("[data-cy=all-offers] section").should("have.length", 1);
+    // cy.get("[data-cy=all-offers] section").should("have.length", 1);
+    cy.checkNumberOfOffers(1);
   });
   //Clicking on the short job offer causes modal to show and url to change
   it("should open modal after clicking short offer and change url", () => {
@@ -57,3 +58,5 @@ describe("App", () => {
     });
   });
 });
+
+export {};
